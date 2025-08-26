@@ -5,6 +5,8 @@ import ao.co.amc.APILocator.model.Pastor;
 import ao.co.amc.APILocator.repository.ChurchRepository;
 import jakarta.transaction.Transactional;
 import ao.co.amc.APILocator.dto.ChurchCreateDTO;
+import ao.co.amc.APILocator.dto.ChurchResponseDTO;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +44,7 @@ public class ChurchService {
     }
 
     @Transactional
-    public ChurchCreateDTO save(ChurchCreateDTO churchDTO) {
+    public ChurchResponseDTO save(ChurchCreateDTO churchDTO) {
         Church church = modelMapper.map(churchDTO, Church.class);
         church.setId(null);
 
@@ -50,7 +52,7 @@ public class ChurchService {
         pastorOpt.ifPresent(pastor -> church.setPastor(pastor));
 
         Church saved = churchRepository.save(church);
-        return modelMapper.map(saved, ChurchCreateDTO.class);
+        return modelMapper.map(saved, ChurchResponseDTO.class);
     }
 
     public ChurchCreateDTO updateChurch(UUID id, ChurchCreateDTO churchDTO) {

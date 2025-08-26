@@ -2,16 +2,16 @@ package ao.co.amc.APILocator.dto;
 
 import java.time.LocalDate;
 
-public class PastorDTO {
+public class PastorCreateDTO {
     private String name;
     private String email;
     private String contact1;
     private String contact2;
     private LocalDate dateOfBirth;
 
-    public PastorDTO() {}
+    public PastorCreateDTO() {}
 
-    public PastorDTO(String name, String email, String contact1, String contact2, LocalDate dateOfBirth, byte[] photo) {
+    public PastorCreateDTO(String name, String email, String contact1, String contact2, LocalDate dateOfBirth, byte[] photo) {
         this.name = name;
         this.email = email;
         this.contact1 = contact1;

@@ -1,6 +1,6 @@
 package ao.co.amc.APILocator.controller;
 
-import ao.co.amc.APILocator.dto.PastorDTO;
+import ao.co.amc.APILocator.dto.PastorCreateDTO;
 import ao.co.amc.APILocator.service.PastorService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,28 +24,28 @@ public class PastorController {
     private PastorService pastorService;
 
     @GetMapping
-    public List<PastorDTO> getAllPastors() {
+    public List<PastorCreateDTO> getAllPastors() {
         return pastorService.findAllDTO();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PastorDTO> getPastorById(@PathVariable UUID id) {
-        Optional<PastorDTO> pastorDTO = pastorService.findById(id);
+    public ResponseEntity<PastorCreateDTO> getPastorById(@PathVariable UUID id) {
+        Optional<PastorCreateDTO> pastorDTO = pastorService.findById(id);
         return pastorDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping()
-    public PastorDTO createPastor(@RequestBody PastorDTO pastorDTO){
+    public PastorCreateDTO createPastor(@RequestBody PastorCreateDTO pastorDTO){
 
         return pastorService.save(pastorDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PastorDTO> updatePastor(@PathVariable UUID id, @RequestBody PastorDTO pastorDTO) {
+    public ResponseEntity<PastorCreateDTO> updatePastor(@PathVariable UUID id, @RequestBody PastorCreateDTO pastorDTO) {
         if (!pastorService.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        PastorDTO updated = pastorService.updatePastor(id, pastorDTO);
+        PastorCreateDTO updated = pastorService.updatePastor(id, pastorDTO);
         return ResponseEntity.ok(updated);
     }
 

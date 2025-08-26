@@ -2,7 +2,7 @@ package ao.co.amc.APILocator.service;
 
 import ao.co.amc.APILocator.model.Pastor;
 import ao.co.amc.APILocator.repository.PastorRepository;
-import ao.co.amc.APILocator.dto.PastorDTO;
+import ao.co.amc.APILocator.dto.PastorCreateDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,33 +21,33 @@ public class PastorService {
         this.modelMapper = modelMapper;
     }
 
-    public List<PastorDTO> findAllDTO() {
+    public List<PastorCreateDTO> findAllDTO() {
         return pastorRepository.findAll()
                 .stream()
-                .map(pastor -> modelMapper.map(pastor, PastorDTO.class))
+                .map(pastor -> modelMapper.map(pastor, PastorCreateDTO.class))
                 .toList();
     }
 
-    public Optional<PastorDTO> findById(UUID id) {
+    public Optional<PastorCreateDTO> findById(UUID id) {
         return pastorRepository.findById(id)
-                .map(pastor -> modelMapper.map(pastor, PastorDTO.class));
+                .map(pastor -> modelMapper.map(pastor, PastorCreateDTO.class));
     }
 
     public Optional<Pastor> findByIdInternal(UUID id) {
         return pastorRepository.findById(id);
     }
 
-    public PastorDTO save(PastorDTO pastorDTO) {
+    public PastorCreateDTO save(PastorCreateDTO pastorDTO) {
         Pastor pastor = modelMapper.map(pastorDTO, Pastor.class);
         Pastor saved = pastorRepository.save(pastor);
-        return modelMapper.map(saved, PastorDTO.class);
+        return modelMapper.map(saved, PastorCreateDTO.class);
     }
 
-    public PastorDTO updatePastor(UUID id, PastorDTO pastorDTO) {
+    public PastorCreateDTO updatePastor(UUID id, PastorCreateDTO pastorDTO) {
         Pastor entity = modelMapper.map(pastorDTO, Pastor.class);
         entity.setId(id);
         Pastor updated = pastorRepository.save(entity);
-        return modelMapper.map(updated, PastorDTO.class);
+        return modelMapper.map(updated, PastorCreateDTO.class);
     }
 
     public void deleteById(UUID id) {

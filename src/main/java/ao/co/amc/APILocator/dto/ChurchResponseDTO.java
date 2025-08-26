@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChurchCreateDTO {
-    
+public class ChurchResponseDTO {
+    private UUID id;
     private Integer number;
     private String name;
     private String acronym;

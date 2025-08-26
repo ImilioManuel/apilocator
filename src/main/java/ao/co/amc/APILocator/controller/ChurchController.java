@@ -1,8 +1,10 @@
 package ao.co.amc.APILocator.controller;
 
 import ao.co.amc.APILocator.dto.ChurchCreateDTO;
+import ao.co.amc.APILocator.dto.ChurchResponseDTO;
 import ao.co.amc.APILocator.service.ChurchService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +35,8 @@ public class ChurchController {
     }
 
     @PostMapping()
-    public ChurchCreateDTO createChurch(@RequestBody ChurchCreateDTO churchDTO){
-        return churchService.save(churchDTO);
+    public ResponseEntity<ChurchResponseDTO> createChurch(@RequestBody ChurchCreateDTO churchDTO){
+        return ResponseEntity.status(HttpStatus.CREATED).body(churchService.save(churchDTO));
     }
 
     @PutMapping("/{id}")
